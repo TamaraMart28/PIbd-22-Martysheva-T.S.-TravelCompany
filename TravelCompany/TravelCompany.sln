@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyView", "Travel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyContracts", "TravelCompanyContracts\TravelCompanyContracts.csproj", "{F8484ABF-A0BA-4C43-BBAD-BE3C7410FB36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyBusinessLogic", "TravelCompanyBusinessLogic\TravelCompanyBusinessLogic.csproj", "{A6492F6D-C278-4727-BEC1-EAD16C47A072}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyListImplement", "TravelCompanyListImplement\TravelCompanyListImplement.csproj", "{554CF070-3985-40B7-BAF1-3074D805C134}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F8484ABF-A0BA-4C43-BBAD-BE3C7410FB36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8484ABF-A0BA-4C43-BBAD-BE3C7410FB36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8484ABF-A0BA-4C43-BBAD-BE3C7410FB36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6492F6D-C278-4727-BEC1-EAD16C47A072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6492F6D-C278-4727-BEC1-EAD16C47A072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6492F6D-C278-4727-BEC1-EAD16C47A072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6492F6D-C278-4727-BEC1-EAD16C47A072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554CF070-3985-40B7-BAF1-3074D805C134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554CF070-3985-40B7-BAF1-3074D805C134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554CF070-3985-40B7-BAF1-3074D805C134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554CF070-3985-40B7-BAF1-3074D805C134}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
