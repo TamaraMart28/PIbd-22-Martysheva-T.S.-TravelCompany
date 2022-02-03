@@ -28,6 +28,22 @@ namespace TravelCompanyView
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             // прописать логику
+            try
+            {
+                var list = _logicT.Read(null);
+                if (list != null)
+                {
+                    comboBoxTravel.DataSource = list;
+                    comboBoxTravel.DisplayMember = "TravelName";
+                    comboBoxTravel.ValueMember = "Id";
+                    comboBoxTravel.SelectedItem = null;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CalcSum()

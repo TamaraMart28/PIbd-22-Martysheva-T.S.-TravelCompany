@@ -35,6 +35,14 @@ namespace TravelCompanyView
             {
                 var list = _orderLogic.Read(null);
                 // прописать логику
+                if (list != null)
+                {
+                    dataGridViewOrders.DataSource = list;
+                    dataGridViewOrders.Columns[0].Visible = false;
+                    dataGridViewOrders.Columns[1].Visible = false;
+                    dataGridViewOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                }
             }
             catch (Exception ex)
             {
