@@ -36,7 +36,9 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
         {
             var element = _travelStorage.GetElement(new TravelBindingModel
             {
-                TravelName = model.TravelName
+                TravelName = model.TravelName,
+                Price = model.Price,
+                TravelConditions = model.TravelConditions
             });
             if (element != null && element.Id != model.Id)
             {

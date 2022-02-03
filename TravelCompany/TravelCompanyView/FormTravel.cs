@@ -27,6 +27,7 @@ namespace TravelCompanyView
             _logic = logic;
         }
 
+
         private void FormTravel_Load(object sender, EventArgs e)
         {
             if (id.HasValue)
@@ -79,11 +80,11 @@ namespace TravelCompanyView
             {
                 if (travelConditions.ContainsKey(form.Id))
                 {
-                    travelConditions[form.Id] = (form.ComponentName, form.Count);
+                    travelConditions[form.Id] = (form.ConditionName, form.Count);
                 }
                 else
                 {
-                    travelConditions.Add(form.Id, (form.ComponentName, form.Count));
+                    travelConditions.Add(form.Id, (form.ConditionName, form.Count));
                 }
                 LoadData();
             }
@@ -99,7 +100,7 @@ namespace TravelCompanyView
                 form.Count = travelConditions[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    travelConditions[form.Id] = (form.ComponentName, form.Count);
+                    travelConditions[form.Id] = (form.ConditionName, form.Count);
                     LoadData();
                 }
             }

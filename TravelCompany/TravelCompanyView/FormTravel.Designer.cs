@@ -33,13 +33,15 @@
             this.textBoxNameTravel = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.groupBoxConditions = new System.Windows.Forms.GroupBox();
-            this.dataGridViewConditions = new System.Windows.Forms.DataGridView();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.dataGridViewConditions = new System.Windows.Forms.DataGridView();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.Component1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxConditions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConditions)).BeginInit();
             this.SuspendLayout();
@@ -90,34 +92,15 @@
             this.groupBoxConditions.TabStop = false;
             this.groupBoxConditions.Text = "Условия";
             // 
-            // dataGridViewConditions
+            // buttonRefresh
             // 
-            this.dataGridViewConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewConditions.Location = new System.Drawing.Point(15, 22);
-            this.dataGridViewConditions.Name = "dataGridViewConditions";
-            this.dataGridViewConditions.RowTemplate.Height = 25;
-            this.dataGridViewConditions.Size = new System.Drawing.Size(368, 219);
-            this.dataGridViewConditions.TabIndex = 0;
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Location = new System.Drawing.Point(429, 46);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdd.TabIndex = 1;
-            this.buttonAdd.Text = "Добавить";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
-            // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(429, 91);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 2;
-            this.buttonUpdate.Text = "Изменить";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            this.buttonRefresh.Location = new System.Drawing.Point(429, 183);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 4;
+            this.buttonRefresh.Text = "Обновить";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // buttonDelete
             // 
@@ -129,15 +112,37 @@
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // buttonRefresh
+            // buttonUpdate
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(429, 183);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
-            this.buttonRefresh.TabIndex = 4;
-            this.buttonRefresh.Text = "Обновить";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            this.buttonUpdate.Location = new System.Drawing.Point(429, 91);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 2;
+            this.buttonUpdate.Text = "Изменить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(429, 46);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // dataGridViewConditions
+            // 
+            this.dataGridViewConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewConditions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Component1,
+            this.Column2});
+            this.dataGridViewConditions.Location = new System.Drawing.Point(15, 22);
+            this.dataGridViewConditions.Name = "dataGridViewConditions";
+            this.dataGridViewConditions.RowTemplate.Height = 25;
+            this.dataGridViewConditions.Size = new System.Drawing.Size(368, 219);
+            this.dataGridViewConditions.TabIndex = 0;
             // 
             // buttonSave
             // 
@@ -159,6 +164,16 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // Component1
+            // 
+            this.Component1.HeaderText = "Компонент";
+            this.Component1.Name = "Component1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Количество";
+            this.Column2.Name = "Column2";
+            // 
             // FormTravel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -173,6 +188,7 @@
             this.Controls.Add(this.labelNameTravel);
             this.Name = "FormTravel";
             this.Text = "Путевка";
+            this.Load += new System.EventHandler(this.FormTravel_Load);
             this.groupBoxConditions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConditions)).EndInit();
             this.ResumeLayout(false);
@@ -194,5 +210,7 @@
         private System.Windows.Forms.DataGridView dataGridViewConditions;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Component1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

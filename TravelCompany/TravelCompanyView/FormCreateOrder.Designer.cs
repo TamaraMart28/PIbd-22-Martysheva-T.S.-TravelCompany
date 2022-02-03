@@ -72,6 +72,7 @@
             this.comboBoxTravel.Name = "comboBoxTravel";
             this.comboBoxTravel.Size = new System.Drawing.Size(279, 23);
             this.comboBoxTravel.TabIndex = 3;
+            this.comboBoxTravel.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTravel_SelectedIndexChanged);
             // 
             // textBoxCount
             // 
@@ -79,12 +80,12 @@
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(260, 23);
             this.textBoxCount.TabIndex = 4;
+            this.textBoxCount.TextChanged += new System.EventHandler(this.TextBoxCount_TextChanged);
             // 
             // textBoxSum
             // 
             this.textBoxSum.Location = new System.Drawing.Point(106, 124);
             this.textBoxSum.Name = "textBoxSum";
-            this.textBoxSum.ReadOnly = true;
             this.textBoxSum.Size = new System.Drawing.Size(279, 23);
             this.textBoxSum.TabIndex = 5;
             // 
@@ -123,6 +124,7 @@
             this.Controls.Add(this.labelTravel);
             this.Name = "FormCreateOrder";
             this.Text = "Заказ";
+            this.Load += new System.EventHandler(this.FormCreateOrder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -41,18 +41,19 @@ namespace TravelCompanyView
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<IConditionStorage,
-            ConditionStorage>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IOrderStorage, OrderStorage>(new
-            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ITravelStorage, TravelStorage>(new
-            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IConditionLogic, ConditionLogic>(new
-            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
-            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ITravelLogic, TravelLogic>(new
-            HierarchicalLifetimeManager());
+            
+            currentContainer.RegisterType<IConditionStorage, ConditionStorage>(new HierarchicalLifetimeManager());
+            
+            currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<ITravelStorage, TravelStorage>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<IConditionLogic, ConditionLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<ITravelLogic, TravelLogic>(new HierarchicalLifetimeManager());
+
             return currentContainer;
         }
     }

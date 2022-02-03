@@ -20,7 +20,7 @@ namespace TravelCompanyView
             get { return Convert.ToInt32(comboBoxCondition.SelectedValue); }
             set { comboBoxCondition.SelectedValue = value; }
         }
-        public string ComponentName { get { return comboBoxCondition.Text; } }
+        public string ConditionName { get { return comboBoxCondition.Text; } }
         public int Count
         {
             get { return Convert.ToInt32(textBoxCount.Text); }
