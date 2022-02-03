@@ -141,7 +141,7 @@
             this.dataGridViewConditions.Location = new System.Drawing.Point(15, 22);
             this.dataGridViewConditions.Name = "dataGridViewConditions";
             this.dataGridViewConditions.RowTemplate.Height = 25;
-            this.dataGridViewConditions.Size = new System.Drawing.Size(368, 219);
+            this.dataGridViewConditions.Size = new System.Drawing.Size(382, 219);
             this.dataGridViewConditions.TabIndex = 0;
             // 
             // buttonSave
@@ -166,6 +166,7 @@
             // 
             // Component1
             // 
+            this.Component1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Component1.HeaderText = "Компонент";
             this.Component1.Name = "Component1";
             // 
