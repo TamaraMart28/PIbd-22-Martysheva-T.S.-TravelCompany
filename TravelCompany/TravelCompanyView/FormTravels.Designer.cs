@@ -97,6 +97,7 @@
             this.Controls.Add(this.dataGridViewTravels);
             this.Name = "FormTravels";
             this.Text = "Путевки";
+            this.Load += new System.EventHandler(this.FormTravels_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTravels)).EndInit();
             this.ResumeLayout(false);
 

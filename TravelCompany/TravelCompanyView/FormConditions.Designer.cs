@@ -97,6 +97,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormConditions";
             this.Text = "Условия";
+            this.Load += new System.EventHandler(this.FormConditions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConditions)).EndInit();
             this.ResumeLayout(false);
 

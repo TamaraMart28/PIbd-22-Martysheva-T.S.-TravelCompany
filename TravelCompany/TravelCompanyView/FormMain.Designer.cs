@@ -30,14 +30,14 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.условияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.путевкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewOrders = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
-            this.условияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.путевкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,20 @@
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
+            // 
+            // условияToolStripMenuItem
+            // 
+            this.условияToolStripMenuItem.Name = "условияToolStripMenuItem";
+            this.условияToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.условияToolStripMenuItem.Text = "Условия";
+            this.условияToolStripMenuItem.Click += new System.EventHandler(this.условияToolStripMenuItem_Click);
+            // 
+            // путевкиToolStripMenuItem
+            // 
+            this.путевкиToolStripMenuItem.Name = "путевкиToolStripMenuItem";
+            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.путевкиToolStripMenuItem.Text = "Путевки";
+            this.путевкиToolStripMenuItem.Click += new System.EventHandler(this.путевкиToolStripMenuItem_Click);
             // 
             // dataGridViewOrders
             // 
@@ -120,20 +134,6 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
-            // условияToolStripMenuItem
-            // 
-            this.условияToolStripMenuItem.Name = "условияToolStripMenuItem";
-            this.условияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.условияToolStripMenuItem.Text = "Условия";
-            this.условияToolStripMenuItem.Click += new System.EventHandler(this.условияToolStripMenuItem_Click);
-            // 
-            // путевкиToolStripMenuItem
-            // 
-            this.путевкиToolStripMenuItem.Name = "путевкиToolStripMenuItem";
-            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.путевкиToolStripMenuItem.Text = "Путевки";
-            this.путевкиToolStripMenuItem.Click += new System.EventHandler(this.путевкиToolStripMenuItem_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -149,6 +149,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "Туристическая фирма";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).EndInit();

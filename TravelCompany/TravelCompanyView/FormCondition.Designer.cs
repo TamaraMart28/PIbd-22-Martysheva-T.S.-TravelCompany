@@ -81,6 +81,7 @@
             this.Controls.Add(this.labelNameCondition);
             this.Name = "FormCondition";
             this.Text = "Условие";
+            this.Load += new System.EventHandler(this.FormCondition_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
