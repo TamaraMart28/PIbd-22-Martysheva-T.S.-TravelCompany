@@ -38,6 +38,8 @@
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonIssuedOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
+            this.хранилищаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пополнитьХранилищеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +58,9 @@
             // 
             this.справочникToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.условияToolStripMenuItem,
-            this.путевкиToolStripMenuItem});
+            this.путевкиToolStripMenuItem,
+            this.хранилищаToolStripMenuItem,
+            this.пополнитьХранилищеToolStripMenuItem});
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
@@ -64,14 +68,14 @@
             // условияToolStripMenuItem
             // 
             this.условияToolStripMenuItem.Name = "условияToolStripMenuItem";
-            this.условияToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.условияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.условияToolStripMenuItem.Text = "Условия";
             this.условияToolStripMenuItem.Click += new System.EventHandler(this.условияToolStripMenuItem_Click);
             // 
             // путевкиToolStripMenuItem
             // 
             this.путевкиToolStripMenuItem.Name = "путевкиToolStripMenuItem";
-            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.путевкиToolStripMenuItem.Text = "Путевки";
             this.путевкиToolStripMenuItem.Click += new System.EventHandler(this.путевкиToolStripMenuItem_Click);
             // 
@@ -126,13 +130,27 @@
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(681, 255);
+            this.buttonRef.Location = new System.Drawing.Point(653, 255);
             this.buttonRef.Name = "buttonRef";
-            this.buttonRef.Size = new System.Drawing.Size(75, 23);
+            this.buttonRef.Size = new System.Drawing.Size(135, 23);
             this.buttonRef.TabIndex = 6;
             this.buttonRef.Text = "Обновить список";
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
+            // 
+            // хранилищаToolStripMenuItem
+            // 
+            this.хранилищаToolStripMenuItem.Name = "хранилищаToolStripMenuItem";
+            this.хранилищаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.хранилищаToolStripMenuItem.Text = "Хранилища";
+            this.хранилищаToolStripMenuItem.Click += new System.EventHandler(this.хранилищаToolStripMenuItem_Click);
+            // 
+            // пополнитьХранилищеToolStripMenuItem
+            // 
+            this.пополнитьХранилищеToolStripMenuItem.Name = "пополнитьХранилищеToolStripMenuItem";
+            this.пополнитьХранилищеToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.пополнитьХранилищеToolStripMenuItem.Text = "Пополнить хранилище";
+            this.пополнитьХранилищеToolStripMenuItem.Click += new System.EventHandler(this.пополнитьХранилищеToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -170,5 +188,7 @@
         private System.Windows.Forms.Button buttonRef;
         private System.Windows.Forms.ToolStripMenuItem условияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem путевкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem хранилищаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пополнитьХранилищеToolStripMenuItem;
     }
 }
