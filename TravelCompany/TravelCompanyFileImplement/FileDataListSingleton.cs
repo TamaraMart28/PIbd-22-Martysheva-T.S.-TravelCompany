@@ -43,6 +43,13 @@ namespace TravelCompanyFileImplement
             SaveTravels();
         }
 
+        public void SaveData()
+        {
+            SaveConditions();
+            SaveOrders();
+            SaveTravels();
+        }
+
         private List<Condition> LoadConditions()
         {
             var list = new List<Condition>();
