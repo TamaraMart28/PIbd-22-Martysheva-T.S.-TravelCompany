@@ -140,7 +140,7 @@ namespace TravelCompanyView
             form.ShowDialog();
         }
 
-        private void пополнитьХранилищеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void пополнитьХранилищеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCompanyConditionsAdding>();
             form.ShowDialog();
