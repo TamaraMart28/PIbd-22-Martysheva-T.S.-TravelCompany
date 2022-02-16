@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyView", "TravelCompanyView\TravelCompanyView.csproj", "{E2E77AF3-9266-4AED-9E96-502020962BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyView", "TravelCompanyView\TravelCompanyView.csproj", "{E2E77AF3-9266-4AED-9E96-502020962BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyContracts", "TravelCompanyContracts\TravelCompanyContracts.csproj", "{F8484ABF-A0BA-4C43-BBAD-BE3C7410FB36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyContracts", "TravelCompanyContracts\TravelCompanyContracts.csproj", "{F8484ABF-A0BA-4C43-BBAD-BE3C7410FB36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyBusinessLogic", "TravelCompanyBusinessLogic\TravelCompanyBusinessLogic.csproj", "{A6492F6D-C278-4727-BEC1-EAD16C47A072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyBusinessLogic", "TravelCompanyBusinessLogic\TravelCompanyBusinessLogic.csproj", "{A6492F6D-C278-4727-BEC1-EAD16C47A072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyListImplement", "TravelCompanyListImplement\TravelCompanyListImplement.csproj", "{554CF070-3985-40B7-BAF1-3074D805C134}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyListImplement", "TravelCompanyListImplement\TravelCompanyListImplement.csproj", "{554CF070-3985-40B7-BAF1-3074D805C134}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyFileImplement", "TravelCompanyFileImplement\TravelCompanyFileImplement.csproj", "{5EFE371B-15BF-4A5B-8465-049B57272374}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{554CF070-3985-40B7-BAF1-3074D805C134}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554CF070-3985-40B7-BAF1-3074D805C134}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554CF070-3985-40B7-BAF1-3074D805C134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EFE371B-15BF-4A5B-8465-049B57272374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EFE371B-15BF-4A5B-8465-049B57272374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EFE371B-15BF-4A5B-8465-049B57272374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EFE371B-15BF-4A5B-8465-049B57272374}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
