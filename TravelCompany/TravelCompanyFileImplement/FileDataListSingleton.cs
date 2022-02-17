@@ -36,18 +36,11 @@ namespace TravelCompanyFileImplement
             return instance;
         }
 
-        ~FileDataListSingleton()
+        public static void SaveData()
         {
-            SaveConditions();
-            SaveOrders();
-            SaveTravels();
-        }
-
-        public void SaveData()
-        {
-            SaveConditions();
-            SaveOrders();
-            SaveTravels();
+            instance.SaveConditions();
+            instance.SaveOrders();
+            instance.SaveTravels();
         }
 
         private List<Condition> LoadConditions()
