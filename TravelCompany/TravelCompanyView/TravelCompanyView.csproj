@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TravelCompanyBusinessLogic\TravelCompanyBusinessLogic.csproj" />
+    <ProjectReference Include="..\TravelCompanyDatabaseImplement\TravelCompanyDatabaseImplement.csproj" />
     <ProjectReference Include="..\TravelCompanyFileImplement\TravelCompanyFileImplement.csproj" />
     <ProjectReference Include="..\TravelCompanyListImplement\TravelCompanyListImplement.csproj" />
   </ItemGroup>
