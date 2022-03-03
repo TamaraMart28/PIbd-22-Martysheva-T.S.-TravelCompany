@@ -6,8 +6,7 @@ using System.Windows.Forms;
 using TravelCompanyBusinessLogic.BusinessLogics;
 using TravelCompanyContracts.BusinessLogicsContracts;
 using TravelCompanyContracts.StoragesContracts;
-using TravelCompanyFileImplement.Implements;
-using TravelCompanyFileImplement;
+using TravelCompanyDatabaseImplement.Implements;
 using Unity;
 using Unity.Lifetime;
 
@@ -37,7 +36,6 @@ namespace TravelCompanyView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
-            FileDataListSingleton.SaveData();
         }
 
         private static IUnityContainer BuildUnityContainer()
