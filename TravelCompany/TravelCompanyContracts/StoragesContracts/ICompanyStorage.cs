@@ -16,5 +16,6 @@ namespace TravelCompanyContracts.StoragesContracts
         void Insert(CompanyBindingModel model);
         void Update(CompanyBindingModel model);
         void Delete(CompanyBindingModel model);
+        bool CheckAndTake(Dictionary<int, (string, int)> conditions, int countNeed);
     }
 }

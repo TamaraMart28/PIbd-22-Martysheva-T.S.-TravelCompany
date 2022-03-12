@@ -162,5 +162,10 @@ namespace TravelCompanyListImplement.Implements
                 CompanyConditions = companyConditions
             };
         }
+
+        public bool CheckAndTake(Dictionary<int, (string, int)> conditions, int countNeed)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
