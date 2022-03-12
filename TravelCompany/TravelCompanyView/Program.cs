@@ -50,11 +50,15 @@ namespace TravelCompanyView
 
             currentContainer.RegisterType<ITravelStorage, TravelStorage>(new HierarchicalLifetimeManager());
 
+            currentContainer.RegisterType<ICompanyStorage, CompanyStorage>(new HierarchicalLifetimeManager());
+
             currentContainer.RegisterType<IConditionLogic, ConditionLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<ITravelLogic, TravelLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<ICompanyLogic, CompanyLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

@@ -133,5 +133,17 @@ namespace TravelCompanyView
         {
             LoadData();
         }
+
+        private void хранилищаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormCompanies>();
+            form.ShowDialog();
+        }
+
+        private void пополнитьХранилищеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormCompanyConditionsAdding>();
+            form.ShowDialog();
+        }
     }
 }
