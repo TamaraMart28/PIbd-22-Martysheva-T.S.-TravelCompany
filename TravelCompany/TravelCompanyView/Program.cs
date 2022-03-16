@@ -7,6 +7,8 @@ using TravelCompanyBusinessLogic.BusinessLogics;
 using TravelCompanyContracts.BusinessLogicsContracts;
 using TravelCompanyContracts.StoragesContracts;
 using TravelCompanyDatabaseImplement.Implements;
+using TravelCompanyBusinessLogic.OfficePackage;
+using TravelCompanyBusinessLogic.OfficePackage.Implements;
 using Unity;
 using Unity.Lifetime;
 
@@ -53,6 +55,14 @@ namespace TravelCompanyView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<ITravelLogic, TravelLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }
