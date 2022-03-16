@@ -119,7 +119,7 @@ namespace TravelCompanyDatabaseImplement.Implements
             {
                 Id = order.Id,
                 TravelId = order.TravelId,
-                TravelName = context.Travels.FirstOrDefault(rec => rec.Id == order.TravelId)?.TravelName,
+                TravelName = order.Travel.TravelName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
