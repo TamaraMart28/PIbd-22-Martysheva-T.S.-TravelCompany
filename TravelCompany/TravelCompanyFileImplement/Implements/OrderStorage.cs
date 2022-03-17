@@ -32,7 +32,7 @@ namespace TravelCompanyFileImplement.Implements
                 return null;
             }
             return source.Orders
-                .Where(rec => rec.TravelId.Equals(model.TravelId))
+                .Where(rec => rec.TravelId.Equals(model.TravelId) || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Select(CreateModel)
                 .ToList();
         }

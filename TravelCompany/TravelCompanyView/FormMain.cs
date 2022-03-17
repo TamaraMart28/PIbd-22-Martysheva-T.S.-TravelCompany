@@ -154,5 +154,11 @@ namespace TravelCompanyView
             var form = Program.Container.Resolve<FormReportTravelConditions>();
             form.ShowDialog();
         }
+
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
     }
 }

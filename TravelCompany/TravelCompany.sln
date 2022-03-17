@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyListImplement"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyFileImplement", "TravelCompanyFileImplement\TravelCompanyFileImplement.csproj", "{5EFE371B-15BF-4A5B-8465-049B57272374}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyDatabaseImplement", "TravelCompanyDatabaseImplement\TravelCompanyDatabaseImplement.csproj", "{64FFB87D-2941-4163-821A-B6DCCD17A877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyDatabaseImplement", "TravelCompanyDatabaseImplement\TravelCompanyDatabaseImplement.csproj", "{64FFB87D-2941-4163-821A-B6DCCD17A877}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
