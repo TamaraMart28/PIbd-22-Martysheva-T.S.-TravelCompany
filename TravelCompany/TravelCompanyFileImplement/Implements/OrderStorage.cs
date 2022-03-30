@@ -32,7 +32,9 @@ namespace TravelCompanyFileImplement.Implements
                 return null;
             }
             return source.Orders
-                .Where(rec => rec.TravelId.Equals(model.TravelId) || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                .Where(rec => rec.TravelId.Equals(model.TravelId) || (model.DateFrom.HasValue && model.DateTo.HasValue && 
+                rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                || model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)
                 .Select(CreateModel)
                 .ToList();
         }
@@ -80,6 +82,7 @@ namespace TravelCompanyFileImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.TravelId = model.TravelId;
+            order.ClientId = model.ClientId.Value;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -94,6 +97,8 @@ namespace TravelCompanyFileImplement.Implements
             {
                 Id = order.Id,
                 TravelId = order.TravelId,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientFIO,
                 TravelName = source.Travels.FirstOrDefault(rec => rec.Id == order.TravelId)?.TravelName,
                 Count = order.Count,
                 Sum = order.Sum,

@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using System.Runtime.Serialization;
+using System.ComponentModel;
 
 namespace TravelCompanyContracts.ViewModels
 {
     [DataContract]
-    public class TravelViewModel
+    public class ClientViewModel
     {
         [DataMember]
         public int Id { get; set; }
 
         [DataMember]
-        [DisplayName("Название путевки")]
-        public string TravelName { get; set; }
+        [DisplayName("ФИО клиента")]
+        public string ClientFIO { get; set; }
 
         [DataMember]
-        [DisplayName("Цена")]
-        public decimal Price { get; set; }
+        [DisplayName("Логин")]
+        public string Login { get; set; }
 
         [DataMember]
-        public Dictionary<int, (string, int)> TravelConditions { get; set; }
+        [DisplayName("Пароль")]
+        public string Password { get; set; }
     }
 }

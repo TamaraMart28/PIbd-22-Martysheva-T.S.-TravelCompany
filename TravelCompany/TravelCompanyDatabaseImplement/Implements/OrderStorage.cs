@@ -17,10 +17,12 @@ namespace TravelCompanyDatabaseImplement.Implements
         {
             using var context = new TravelCompanyDatabase();
 
-            return context.Orders.Include(rec => rec.Travel).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 TravelId = rec.TravelId,
+                ClientId = rec.ClientId,
+                ClientFIO = rec.Client.ClientFIO,
                 TravelName = rec.Travel.TravelName,
                 Count = rec.Count,
                 Sum = rec.Sum,
@@ -39,18 +41,23 @@ namespace TravelCompanyDatabaseImplement.Implements
 
             using var context = new TravelCompanyDatabase();
 
-            return context.Orders.Include(rec => rec.Travel).Where(rec => rec.TravelId == model.TravelId || 
-            (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)).Select(rec => new OrderViewModel
-            {
-                Id = rec.Id,
-                TravelId = rec.TravelId,
-                TravelName = rec.Travel.TravelName,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                Status = rec.Status.ToString(),
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
-            }).ToList();
+            return context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client)
+                .Where(rec => rec.TravelId == model.TravelId ||  
+                (model.DateFrom.HasValue && model.DateTo.HasValue && 
+                rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) || 
+                model.ClientId.HasValue && rec.ClientId == model.ClientId).Select(rec => new OrderViewModel
+                {
+                    Id = rec.Id,
+                    TravelId = rec.TravelId,
+                    ClientId = rec.ClientId,
+                    ClientFIO = rec.Client.ClientFIO,
+                    TravelName = rec.Travel.TravelName,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    Status = rec.Status.ToString(),
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement
+                }).ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -62,7 +69,7 @@ namespace TravelCompanyDatabaseImplement.Implements
 
             using var context = new TravelCompanyDatabase();
 
-            var order = context.Orders.Include(rec => rec.Travel).FirstOrDefault(rec => rec.Id == model.Id);
+            var order = context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).FirstOrDefault(rec => rec.Id == model.Id);
 
             return order != null ? CreateModel(order, context) : null;
         }
@@ -106,6 +113,7 @@ namespace TravelCompanyDatabaseImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.TravelId = model.TravelId;
+            order.ClientId = model.ClientId.Value;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -120,6 +128,8 @@ namespace TravelCompanyDatabaseImplement.Implements
             {
                 Id = order.Id,
                 TravelId = order.TravelId,
+                ClientId = order.ClientId,
+                ClientFIO = order.Client.ClientFIO,
                 TravelName = order.Travel.TravelName,
                 Count = order.Count,
                 Sum = order.Sum,

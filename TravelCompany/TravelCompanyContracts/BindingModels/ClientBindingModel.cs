@@ -8,16 +8,18 @@ using System.Runtime.Serialization;
 namespace TravelCompanyContracts.BindingModels
 {
     [DataContract]
-    public class CreateOrderBindingModel
+    public class ClientBindingModel
     {
         [DataMember]
-        public int TravelId { get; set; }
-        [DataMember]
-        public int ClientId { get; set; }
-        [DataMember]
-        public int Count { get; set; }
-        [DataMember]
-        public decimal Sum { get; set; }
+        public int? Id { get; set; }
 
+        [DataMember]
+        public string ClientFIO { get; set; }
+
+        [DataMember]
+        public string Login { get; set; }
+
+        [DataMember]
+        public string Password { get; set; }
     }
 }

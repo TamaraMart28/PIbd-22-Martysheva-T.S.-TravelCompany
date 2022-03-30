@@ -17,15 +17,18 @@ namespace TravelCompanyFileImplement
         private readonly string ConditionFileName = "Condition.xml";
         private readonly string OrderFileName = "Order.xml";
         private readonly string TravelFileName = "Travel.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Condition> Conditions { get; set; }
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
+        public List<Client> Clients { get; set; }
 
         private FileDataListSingleton()
         {
             Conditions = LoadConditions();
             Orders = LoadOrders();
             Travels = LoadTravels();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -41,6 +44,7 @@ namespace TravelCompanyFileImplement
             instance.SaveConditions();
             instance.SaveOrders();
             instance.SaveTravels();
+            instance.SaveClients();
         }
 
         private List<Condition> LoadConditions()
@@ -76,6 +80,7 @@ namespace TravelCompanyFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         TravelId = Convert.ToInt32(elem.Element("TravelId").Value),
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value),
@@ -114,6 +119,27 @@ namespace TravelCompanyFileImplement
             return list;
         }
 
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value,
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveConditions()
         {
             if (Conditions != null)
@@ -141,6 +167,7 @@ namespace TravelCompanyFileImplement
                     xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
                         new XElement("TravelId", order.TravelId),
+                        new XElement("ClientId", order.ClientId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
                         new XElement("Status", order.Status),
@@ -174,6 +201,24 @@ namespace TravelCompanyFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(TravelFileName);
+            }
+        }
+
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Login", client.Login),
+                    new XElement("Password", client.Password)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
     }
