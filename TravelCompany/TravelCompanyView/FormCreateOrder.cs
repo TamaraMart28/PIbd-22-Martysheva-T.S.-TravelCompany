@@ -18,11 +18,13 @@ namespace TravelCompanyView
     {
         private readonly ITravelLogic _logicT;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(ITravelLogic logicT, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+        public FormCreateOrder(ITravelLogic logicT, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicT = logicT;
             _logicO = logicO;
+            _logicC = logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -30,15 +32,24 @@ namespace TravelCompanyView
             // прописать логику
             try
             {
-                var list = _logicT.Read(null);
-                if (list != null)
+                var listT = _logicT.Read(null);
+                foreach (var travel in listT)
                 {
-                    comboBoxTravel.DataSource = list;
+                    comboBoxTravel.DataSource = listT;
                     comboBoxTravel.DisplayMember = "TravelName";
                     comboBoxTravel.ValueMember = "Id";
                     comboBoxTravel.SelectedItem = null;
                 }
-                
+
+                var listC = _logicC.Read(null);
+                foreach (var client in listC)
+                {
+                    comboBoxClient.DataSource = listC;
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.SelectedItem = null;
+                }
+
             }
             catch (Exception ex)
             {
@@ -53,9 +64,9 @@ namespace TravelCompanyView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxTravel.SelectedValue);
-                    TravelViewModel product = _logicT.Read(new TravelBindingModel { Id = id })?[0];
+                    TravelViewModel travel = _logicT.Read(new TravelBindingModel { Id = id })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxSum.Text = (count * product?.Price ?? 0).ToString();
+                    textBoxSum.Text = (count * travel?.Price ?? 0).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -86,11 +97,17 @@ namespace TravelCompanyView
                 MessageBox.Show("Выберите путевку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     TravelId = Convert.ToInt32(comboBoxTravel.SelectedValue),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });

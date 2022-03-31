@@ -18,12 +18,14 @@ namespace TravelCompanyView
     {
         private readonly IOrderLogic _orderLogic;
         private readonly IReportLogic _reportLogic;
+        private readonly IClientLogic _clientLogic;
 
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IClientLogic clientLogic)
         {
             InitializeComponent();
             _orderLogic = orderLogic;
             _reportLogic = reportLogic;
+            _clientLogic = clientLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -42,8 +44,8 @@ namespace TravelCompanyView
                     dataGridViewOrders.DataSource = list;
                     dataGridViewOrders.Columns[0].Visible = false;
                     dataGridViewOrders.Columns[1].Visible = false;
-                    dataGridViewOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+                    dataGridViewOrders.Columns[2].Visible = false;
+                    dataGridViewOrders.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -158,6 +160,12 @@ namespace TravelCompanyView
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
         }
     }
