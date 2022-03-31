@@ -14,7 +14,7 @@ namespace TravelCompanyDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=Tamara-PC\SQLEXPRESS;Initial Catalog=TravelCompanyDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=Tamara-PC\SQLEXPRESS;Initial Catalog=TravelCompanyDatabaseComp;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
