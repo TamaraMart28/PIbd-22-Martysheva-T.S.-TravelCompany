@@ -168,7 +168,7 @@ namespace TravelCompanyDatabaseImplement.Migrations
                         .IsRequired();
 
                     b.HasOne("TravelCompanyDatabaseImplement.Models.Condition", "Condition")
-                        .WithMany()
+                        .WithMany("CompanyConditions")
                         .HasForeignKey("ConditionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -215,6 +215,8 @@ namespace TravelCompanyDatabaseImplement.Migrations
 
             modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Condition", b =>
                 {
+                    b.Navigation("CompanyConditions");
+
                     b.Navigation("TravelConditions");
                 });
 

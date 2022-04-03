@@ -10,7 +10,7 @@ using TravelCompanyDatabaseImplement;
 namespace TravelCompanyDatabaseImplement.Migrations
 {
     [DbContext(typeof(TravelCompanyDatabase))]
-    [Migration("20220331103502_Mig3Comp")]
+    [Migration("20220403122940_Mig3Comp")]
     partial class Mig3Comp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,7 +170,7 @@ namespace TravelCompanyDatabaseImplement.Migrations
                         .IsRequired();
 
                     b.HasOne("TravelCompanyDatabaseImplement.Models.Condition", "Condition")
-                        .WithMany()
+                        .WithMany("CompanyConditions")
                         .HasForeignKey("ConditionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -217,6 +217,8 @@ namespace TravelCompanyDatabaseImplement.Migrations
 
             modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Condition", b =>
                 {
+                    b.Navigation("CompanyConditions");
+
                     b.Navigation("TravelConditions");
                 });
 
