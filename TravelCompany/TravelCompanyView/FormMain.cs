@@ -135,30 +135,5 @@ namespace TravelCompanyView
         {
             LoadData();
         }
-
-        private void списокПутевокToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                _reportLogic.SaveTravelsToWordFile(new ReportBindingModel
-                {
-                    FileName = dialog.FileName
-                });
-                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void путевкиСУсловиямиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Program.Container.Resolve<FormReportTravelConditions>();
-            form.ShowDialog();
-        }
-
-        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Program.Container.Resolve<FormReportOrders>();
-            form.ShowDialog();
-        }
     }
 }
