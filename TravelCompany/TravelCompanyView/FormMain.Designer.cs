@@ -64,14 +64,14 @@
             // условияToolStripMenuItem
             // 
             this.условияToolStripMenuItem.Name = "условияToolStripMenuItem";
-            this.условияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.условияToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.условияToolStripMenuItem.Text = "Условия";
             this.условияToolStripMenuItem.Click += new System.EventHandler(this.условияToolStripMenuItem_Click);
             // 
             // путевкиToolStripMenuItem
             // 
             this.путевкиToolStripMenuItem.Name = "путевкиToolStripMenuItem";
-            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.путевкиToolStripMenuItem.Text = "Путевки";
             this.путевкиToolStripMenuItem.Click += new System.EventHandler(this.путевкиToolStripMenuItem_Click);
             // 
