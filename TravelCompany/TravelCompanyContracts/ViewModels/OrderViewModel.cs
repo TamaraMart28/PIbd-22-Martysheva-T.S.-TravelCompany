@@ -15,8 +15,13 @@ namespace TravelCompanyContracts.ViewModels
 
         public int ClientId { get; set; }
 
+        public int? ImplementerId { get; set; }
+
         [DisplayName("ФИО клиента")]
         public string ClientFIO { get; set; }
+
+        [DisplayName("ФИО исполнителя")]
+        public string ImplementerFIO { get; set; }
 
         [DisplayName("Путевка")]
         public string TravelName { get; set; }

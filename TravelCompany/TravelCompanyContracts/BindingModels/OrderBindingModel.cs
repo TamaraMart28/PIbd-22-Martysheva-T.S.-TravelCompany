@@ -14,7 +14,9 @@ namespace TravelCompanyContracts.BindingModels
         public int TravelId { get; set; }
         
         public int? ClientId { get; set; }
-        
+
+        public int? ImplementerId { get; set; }
+
         public int Count { get; set; }
         
         public decimal Sum { get; set; }
@@ -28,5 +30,7 @@ namespace TravelCompanyContracts.BindingModels
         public DateTime? DateFrom { get; set; }
         
         public DateTime? DateTo { get; set; }
+
+        public OrderStatus? SearchStatus { get; set; }
     }
 }
