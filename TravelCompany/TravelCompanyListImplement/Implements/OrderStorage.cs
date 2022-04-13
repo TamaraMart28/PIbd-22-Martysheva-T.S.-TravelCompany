@@ -40,7 +40,9 @@ namespace TravelCompanyListImplement.Implements
             {
                 if (order.Id == model.Id || (model.DateFrom.HasValue && model.DateTo.HasValue && 
                     order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
-                    || model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
+                    || (model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
+                    || (model.SearchStatus.HasValue && model.SearchStatus.Value == order.Status)
+                    || (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && model.Status == order.Status))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -114,6 +116,7 @@ namespace TravelCompanyListImplement.Implements
         {
             order.TravelId = model.TravelId;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -142,12 +145,23 @@ namespace TravelCompanyListImplement.Implements
                     break;
                 }
             }
+            string ImplementerFIO = null;
+            for (int j = 0; j < source.Implementers.Count; ++j)
+            {
+                if (source.Implementers[j].Id == order.ImplementerId)
+                {
+                    ImplementerFIO = source.Implementers[j].ImplementerFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 TravelId = order.TravelId,
                 ClientId = order.ClientId,
                 ClientFIO = ClientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = ImplementerFIO,
                 TravelName = TravelName,
                 Count = order.Count,
                 Sum = order.Sum,

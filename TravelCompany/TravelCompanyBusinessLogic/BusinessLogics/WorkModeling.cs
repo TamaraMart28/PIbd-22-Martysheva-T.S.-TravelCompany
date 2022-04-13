@@ -32,14 +32,12 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
             }));
             foreach (var implementer in implementers)
             {
-                Task.Run(async () => await WorkerWorkAsync(implementer,
-                orders));
+                Task.Run(async () => await WorkerWorkAsync(implementer, orders));
             }
         }
 
         // Иммитация работы исполнителя
-        private async Task WorkerWorkAsync(ImplementerViewModel implementer,
-        ConcurrentBag<OrderViewModel> orders)
+        private async Task WorkerWorkAsync(ImplementerViewModel implementer, ConcurrentBag<OrderViewModel> orders)
         {
             // ищем заказы, которые уже в работе (вдруг исполнителя прервали)
             var runOrders = await Task.Run(() => _orderLogic.Read(new OrderBindingModel
@@ -74,7 +72,8 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                         _orderLogic.FinishOrder(new ChangeStatusBindingModel
                         { 
-                            OrderId = order.Id 
+                            OrderId = order.Id,
+                            ImplementerId = implementer.Id
                         });
                         // отдыхаем
                         Thread.Sleep(implementer.PauseTime);

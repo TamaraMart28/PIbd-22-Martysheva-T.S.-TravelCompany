@@ -17,12 +17,14 @@ namespace TravelCompanyDatabaseImplement.Implements
         {
             using var context = new TravelCompanyDatabase();
 
-            return context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).Include(rec => rec.Implementer).Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 TravelId = rec.TravelId,
                 ClientId = rec.ClientId,
+                ImplementerId = rec.ImplementerId,
                 ClientFIO = rec.Client.ClientFIO,
+                ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
                 TravelName = rec.Travel.TravelName,
                 Count = rec.Count,
                 Sum = rec.Sum,
@@ -41,16 +43,19 @@ namespace TravelCompanyDatabaseImplement.Implements
 
             using var context = new TravelCompanyDatabase();
 
-            return context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client)
-                .Where(rec => rec.TravelId == model.TravelId ||  
-                (model.DateFrom.HasValue && model.DateTo.HasValue && 
-                rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) || 
-                model.ClientId.HasValue && rec.ClientId == model.ClientId).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).Include(rec => rec.Implementer)
+                .Where(rec => rec.TravelId == model.TravelId 
+                || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) 
+                || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
+                || (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status)
+                || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status)).Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     TravelId = rec.TravelId,
                     ClientId = rec.ClientId,
+                    ImplementerId = rec.ImplementerId,
                     ClientFIO = rec.Client.ClientFIO,
+                    ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : String.Empty,
                     TravelName = rec.Travel.TravelName,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -69,7 +74,8 @@ namespace TravelCompanyDatabaseImplement.Implements
 
             using var context = new TravelCompanyDatabase();
 
-            var order = context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).FirstOrDefault(rec => rec.Id == model.Id);
+            var order = context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).Include(rec => rec.Implementer)
+                .FirstOrDefault(rec => rec.Id == model.Id);
 
             return order != null ? CreateModel(order, context) : null;
         }
@@ -85,7 +91,8 @@ namespace TravelCompanyDatabaseImplement.Implements
         public void Update(OrderBindingModel model)
         {
             using var context = new TravelCompanyDatabase();
-            var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            var element = context.Orders.Include(rec => rec.Travel).Include(rec => rec.Client).Include(rec => rec.Implementer)
+                .FirstOrDefault(rec => rec.Id == model.Id);
             if (element == null)
             {
                 throw new Exception("Элемент не найден");
@@ -114,6 +121,7 @@ namespace TravelCompanyDatabaseImplement.Implements
         {
             order.TravelId = model.TravelId;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -129,7 +137,9 @@ namespace TravelCompanyDatabaseImplement.Implements
                 Id = order.Id,
                 TravelId = order.TravelId,
                 ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 ClientFIO = order.Client.ClientFIO,
+                ImplementerFIO = order.ImplementerId.HasValue ? order.Implementer.ImplementerFIO : String.Empty,
                 TravelName = order.Travel.TravelName,
                 Count = order.Count,
                 Sum = order.Sum,
