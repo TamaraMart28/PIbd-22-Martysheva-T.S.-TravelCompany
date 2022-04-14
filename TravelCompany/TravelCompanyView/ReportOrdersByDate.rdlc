@@ -154,7 +154,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!DateCreate.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>d</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -172,6 +174,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -259,7 +262,7 @@
         <Top>1.71662cm</Top>
         <Left>3.64808cm</Left>
         <Height>1.43812cm</Height>
-        <Width>9.24625cm</Width>
+        <Width>9.24624cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
