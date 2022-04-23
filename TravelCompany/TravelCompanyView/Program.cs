@@ -58,7 +58,7 @@ namespace TravelCompanyView
 
             currentContainer.RegisterType<ITravelLogic, TravelLogic>(new HierarchicalLifetimeManager());
 
-            currentContainer.RegisterType<IClientLogic, ClientLogic>(new HierarchicalLifetimeManager());
+            
 
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
 
