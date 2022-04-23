@@ -18,10 +18,12 @@ namespace TravelCompanyFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string TravelFileName = "Travel.xml";
         private readonly string CompanyFileName = "Company.xml";
+        private readonly string ClientFileName = "Client.xml";
         public List<Condition> Conditions { get; set; }
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
         public List<Company> Companies { get; set; }
+        public List<Client> Clients { get; set; }
 
         private FileDataListSingleton()
         {
@@ -29,6 +31,7 @@ namespace TravelCompanyFileImplement
             Orders = LoadOrders();
             Travels = LoadTravels();
             Companies = LoadCompanies();
+            Clients = LoadClients();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -45,6 +48,7 @@ namespace TravelCompanyFileImplement
             instance.SaveOrders();
             instance.SaveTravels();
             instance.SaveCompanies();
+            instance.SaveClients();
         }
 
         private List<Condition> LoadConditions()
@@ -146,6 +150,27 @@ namespace TravelCompanyFileImplement
             return list;
         }
 
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Login = elem.Element("Login").Value,
+                        Password = elem.Element("Password").Value,
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveConditions()
         {
             if (Conditions != null)
@@ -233,6 +258,24 @@ namespace TravelCompanyFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(CompanyFileName);
+            }
+        }
+
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Login", client.Login),
+                    new XElement("Password", client.Password)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
     }

@@ -14,12 +14,14 @@ namespace TravelCompanyListImplement
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
         public List<Company> Companies { get; set; }
+        public List<Client> Clients { get; set; }
         private DataListSingleton()
         {
             Conditions = new List<Condition>();
             Orders = new List<Order>();
             Travels = new List<Travel>();
             Companies = new List<Company>();
+            Clients = new List<Client>();
         }
         public static DataListSingleton GetInstance()
         {

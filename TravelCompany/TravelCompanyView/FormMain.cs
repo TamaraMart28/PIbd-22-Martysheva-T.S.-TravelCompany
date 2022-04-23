@@ -138,6 +138,7 @@ namespace TravelCompanyView
             LoadData();
         }
 
+
         private void хранилищаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCompanies>();
@@ -197,6 +198,12 @@ namespace TravelCompanyView
         private void списокЗаказовПоДатамToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportOrdersByDate>();
+            form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
         }
     }
