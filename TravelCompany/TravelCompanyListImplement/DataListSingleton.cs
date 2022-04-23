@@ -13,13 +13,13 @@ namespace TravelCompanyListImplement
         public List<Condition> Conditions { get; set; }
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
-        
+        public List<Company> Companies { get; set; }
         private DataListSingleton()
         {
             Conditions = new List<Condition>();
             Orders = new List<Order>();
             Travels = new List<Travel>();
-            
+            Companies = new List<Company>();
         }
         public static DataListSingleton GetInstance()
         {

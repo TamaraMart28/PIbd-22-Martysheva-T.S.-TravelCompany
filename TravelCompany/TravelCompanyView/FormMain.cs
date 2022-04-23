@@ -138,6 +138,18 @@ namespace TravelCompanyView
             LoadData();
         }
 
+        private void хранилищаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormCompanies>();
+            form.ShowDialog();
+        }
+
+        private void пополнитьХранилищеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormCompanyConditionsAdding>();
+            form.ShowDialog();
+        }
+
         private void списокПутевокToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
@@ -163,6 +175,29 @@ namespace TravelCompanyView
             form.ShowDialog();
         }
 
-        
+        private void списокХранилищToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _reportLogic.SaveCompaniesToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void хранилищаСУсловиямиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportCompanyConditions>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовПоДатамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrdersByDate>();
+            form.ShowDialog();
+        }
     }
 }

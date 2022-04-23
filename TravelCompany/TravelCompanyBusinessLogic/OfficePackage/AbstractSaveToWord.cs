@@ -41,6 +41,34 @@ namespace TravelCompanyBusinessLogic.OfficePackage
             SaveWord(info);
         }
 
+        public void CreateDocCompany(WordInfo info)
+        {
+            CreateWord(info);
+
+            CreateParagraph(new WordParagraph
+            {
+                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24" }) },
+                TextProperties = new WordTextProperties
+                {
+                    Size = "24",
+                    JustificationType = WordJustificationType.Center
+                }
+            });
+
+            CreateTable(new List<string>() { "Название", "ФИО ответственного", "Дата создания" });
+
+            foreach (var company in info.Companies)
+            {
+                AddRowTable(new List<string>() {
+                    company.CompanyName,
+                    company.NameResponsible,
+                    company.DateCreate.ToShortDateString()
+                });
+            }
+
+            SaveWord(info);
+        }
+
         // Создание doc-файла
         protected abstract void CreateWord(WordInfo info);
 
@@ -49,5 +77,11 @@ namespace TravelCompanyBusinessLogic.OfficePackage
 
         // Сохранение файла
         protected abstract void SaveWord(WordInfo info);
+
+        // Создание таблицы
+        protected abstract void CreateTable(List<string> tableHeaderInfo);
+
+        // Создание и заполнение строки
+        protected abstract void AddRowTable(List<string> tableRowInfo);
     }
 }

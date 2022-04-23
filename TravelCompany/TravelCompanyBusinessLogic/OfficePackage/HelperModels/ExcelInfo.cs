@@ -12,5 +12,6 @@ namespace TravelCompanyBusinessLogic.OfficePackage.HelperModels
         public string FileName { get; set; }
         public string Title { get; set; }
         public List<ReportTravelConditionViewModel> TravelConditions { get; set; }
+        public List<ReportCompanyConditionViewModel> CompanyConditions { get; set; }
     }
 }

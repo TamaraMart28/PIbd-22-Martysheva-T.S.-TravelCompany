@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace TravelCompanyDatabaseImplement.Models
 {
-    public class Condition
+    public class Company
     {
         public int Id { get; set; }
 
         [Required]
-        public string ConditionName { get; set; }
+        public string CompanyName { get; set; }
 
-        [ForeignKey("ConditionId")]
-        public virtual List<TravelCondition> TravelConditions { get; set; }
-        [ForeignKey("ConditionId")]
+        [Required]
+        public string NameResponsible { get; set; }
+
+        [Required]
+        public DateTime DateCreate { get; set; }
+
+        [ForeignKey("CompanyId")]
         public virtual List<CompanyCondition> CompanyConditions { get; set; }
     }
 }

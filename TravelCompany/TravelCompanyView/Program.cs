@@ -49,6 +49,9 @@ namespace TravelCompanyView
             currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<ITravelStorage, TravelStorage>(new HierarchicalLifetimeManager());
+
+            currentContainer.RegisterType<ICompanyStorage, CompanyStorage>(new HierarchicalLifetimeManager());
+
             
             currentContainer.RegisterType<IClientStorage, ClientStorage>(new HierarchicalLifetimeManager());
 
@@ -58,7 +61,7 @@ namespace TravelCompanyView
 
             currentContainer.RegisterType<ITravelLogic, TravelLogic>(new HierarchicalLifetimeManager());
 
-            
+            currentContainer.RegisterType<ICompanyLogic, CompanyLogic>(new HierarchicalLifetimeManager());
 
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
 
