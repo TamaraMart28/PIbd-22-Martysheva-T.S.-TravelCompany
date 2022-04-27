@@ -57,15 +57,12 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не найден");
             }
-            if (order.Status != Enum.GetName(typeof(OrderStatus), 0))
+            if (order.Status != Enum.GetName(typeof(OrderStatus), 0) && order.Status != Enum.GetName(typeof(OrderStatus), 4))
             {
-                throw new Exception("Заказ не в статусе \"Принят\"");
+                throw new Exception("Заказ не в статусе \"Принят\" или \"Требуются материалы\"");
             }
-            if (!_companyStorage.CheckAndTake(_travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId }).TravelConditions, order.Count))
-            {
-                throw new Exception("Недостаточно условий для путевок, заказ не может быть переведен в статус \"Выполняется\"");
-            }
-            _orderStorage.Update(new OrderBindingModel
+            var travel = _travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId });
+            var tempOrder = new OrderBindingModel
             {
                 Id = order.Id,
                 TravelId = order.TravelId,
@@ -73,10 +70,22 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
                 ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
+                DateCreate = order.DateCreate
+            };
+            try
+            {
+                if (_companyStorage.CheckAndTake(travel.TravelConditions, tempOrder.Count))
+                {
+                    tempOrder.Status = OrderStatus.Выполняется;
+                    tempOrder.DateImplement = DateTime.Now;
+                    _orderStorage.Update(tempOrder);
+                }
+            }
+            catch
+            {
+                tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
+                _orderStorage.Update(tempOrder);
+            }
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)

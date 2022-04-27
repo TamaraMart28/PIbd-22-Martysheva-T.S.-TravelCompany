@@ -204,7 +204,7 @@ namespace TravelCompanyDatabaseImplement.Implements
 					}
 					if (count != 0)
 					{
-						throw new Exception("Недостаточно условий для путевок");
+						return false;
 					}
 				}
 

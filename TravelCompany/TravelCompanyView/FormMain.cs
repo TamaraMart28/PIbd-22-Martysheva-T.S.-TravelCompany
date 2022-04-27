@@ -173,7 +173,7 @@ namespace TravelCompanyView
             form.ShowDialog();
         }
 
-        /*private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormImplementers>();
             form.ShowDialog();
@@ -182,6 +182,6 @@ namespace TravelCompanyView
         private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _workProcess.DoWork(_implementerLogic, _orderLogic);
-        }*/
+        }
     }
 }
