@@ -129,13 +129,13 @@ namespace TravelCompanyView
             form.ShowDialog();
         }
 
-        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        /*private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
         }
 
-        /*private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormImplementers>();
             form.ShowDialog();

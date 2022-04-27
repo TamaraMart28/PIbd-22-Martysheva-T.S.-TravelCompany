@@ -32,7 +32,6 @@
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.условияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.путевкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокПутевокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.путевкиСУсловиямиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,8 +59,7 @@
             // 
             this.справочникToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.условияToolStripMenuItem,
-            this.путевкиToolStripMenuItem,
-            this.клиентыToolStripMenuItem});
+            this.путевкиToolStripMenuItem});
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
@@ -79,13 +77,6 @@
             this.путевкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.путевкиToolStripMenuItem.Text = "Путевки";
             this.путевкиToolStripMenuItem.Click += new System.EventHandler(this.путевкиToolStripMenuItem_Click);
-            // 
-            // клиентыToolStripMenuItem
-            // 
-            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
-            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.клиентыToolStripMenuItem.Text = "Клиенты";
-            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
             // 
             // отчетыToolStripMenuItem
             // 
@@ -193,6 +184,5 @@
         private System.Windows.Forms.ToolStripMenuItem списокПутевокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem путевкиСУсловиямиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }
