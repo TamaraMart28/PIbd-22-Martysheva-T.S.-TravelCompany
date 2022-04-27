@@ -2,7 +2,7 @@
 using TravelCompanyContracts.BusinessLogicsContracts;
 using TravelCompanyContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Collections.Generic;
 
 namespace TravelCompanyRestApi.Controllers
 {
@@ -11,9 +11,11 @@ namespace TravelCompanyRestApi.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientLogic _logic;
-        public ClientController(IClientLogic logic)
+        private readonly IMessageInfoLogic _messageLogic;
+        public ClientController(IClientLogic logic, IMessageInfoLogic messageLogic)
         {
             _logic = logic;
+            _messageLogic = messageLogic;
         }
 
         [HttpGet]
@@ -26,6 +28,9 @@ namespace TravelCompanyRestApi.Controllers
             });
             return (list != null && list.Count > 0) ? list[0] : null;
         }
+
+        [HttpGet]
+        public List<MessageInfoViewModel> GetClientsMessages(int clientId) => _messageLogic.Read(new MessageInfoBindingModel { ClientId = clientId });
 
         [HttpPost]
         public void Register(ClientBindingModel model) => _logic.CreateOrUpdate(model);

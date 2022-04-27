@@ -19,11 +19,13 @@ namespace TravelCompanyFileImplement
         private readonly string TravelFileName = "Travel.xml";
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
+        private readonly string MessageFileName = "Message.xml";
         public List<Condition> Conditions { get; set; }
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> Messages { get; set; }
 
         private FileDataListSingleton()
         {
@@ -32,6 +34,7 @@ namespace TravelCompanyFileImplement
             Travels = LoadTravels();
             Clients = LoadClients();
             Implementers = LoadImplementers();
+            Messages = LoadMessages();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -49,6 +52,7 @@ namespace TravelCompanyFileImplement
             instance.SaveTravels();
             instance.SaveClients();
             instance.SaveImplementers();
+            instance.SaveMessages();
         }
 
         private List<Condition> LoadConditions()
@@ -166,6 +170,30 @@ namespace TravelCompanyFileImplement
             return list;
         }
 
+        private List<MessageInfo> LoadMessages()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageFileName))
+            {
+                XDocument xDocument = XDocument.Load(MessageFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = string.IsNullOrEmpty(elem.Element("ClientId").Value) ?
+                        (int?)null : Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value
+                    });
+                }
+            }
+            return list;
+        }
+
         private void SaveConditions()
         {
             if (Conditions != null)
@@ -264,6 +292,26 @@ namespace TravelCompanyFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ImplementerFileName);
+            }
+        }
+
+        private void SaveMessages()
+        {
+            if (Messages != null)
+            {
+                var xElement = new XElement("Messages");
+                foreach (var msg in Messages)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("MessageId", msg.MessageId),
+                    new XElement("ClientId", msg.ClientId),
+                    new XElement("SenderName", msg.SenderName),
+                    new XElement("DateDelivery", msg.DateDelivery),
+                    new XElement("Subject", msg.Subject),
+                    new XElement("Body", msg.Body)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MessageFileName);
             }
         }
     }
