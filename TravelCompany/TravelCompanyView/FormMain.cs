@@ -141,9 +141,9 @@ namespace TravelCompanyView
             form.ShowDialog();
         }
 
-        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        /*private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _workProcess.DoWork(_implementerLogic, _orderLogic);
-        }
+        }*/
     }
 }
