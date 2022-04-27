@@ -13,6 +13,7 @@ namespace TravelCompanyListImplement
         public List<Condition> Conditions { get; set; }
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
+        public List<Company> Companies { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
         private DataListSingleton()
@@ -20,6 +21,7 @@ namespace TravelCompanyListImplement
             Conditions = new List<Condition>();
             Orders = new List<Order>();
             Travels = new List<Travel>();
+            Companies = new List<Company>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
         }

@@ -18,5 +18,7 @@ namespace TravelCompanyDatabaseImplement.Models
 
         [ForeignKey("ConditionId")]
         public virtual List<TravelCondition> TravelConditions { get; set; }
+        [ForeignKey("ConditionId")]
+        public virtual List<CompanyCondition> CompanyConditions { get; set; }
     }
 }

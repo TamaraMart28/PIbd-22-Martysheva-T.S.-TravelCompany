@@ -17,11 +17,13 @@ namespace TravelCompanyFileImplement
         private readonly string ConditionFileName = "Condition.xml";
         private readonly string OrderFileName = "Order.xml";
         private readonly string TravelFileName = "Travel.xml";
+        private readonly string CompanyFileName = "Company.xml";
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
         public List<Condition> Conditions { get; set; }
         public List<Order> Orders { get; set; }
         public List<Travel> Travels { get; set; }
+        public List<Company> Companies { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
 
@@ -30,6 +32,7 @@ namespace TravelCompanyFileImplement
             Conditions = LoadConditions();
             Orders = LoadOrders();
             Travels = LoadTravels();
+            Companies = LoadCompanies();
             Clients = LoadClients();
             Implementers = LoadImplementers();
         }
@@ -47,6 +50,7 @@ namespace TravelCompanyFileImplement
             instance.SaveConditions();
             instance.SaveOrders();
             instance.SaveTravels();
+            instance.SaveCompanies();
             instance.SaveClients();
             instance.SaveImplementers();
         }
@@ -118,6 +122,33 @@ namespace TravelCompanyFileImplement
                         TravelName = elem.Element("TravelName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value),
                         TravelConditions = travCond
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Company> LoadCompanies()
+        {
+            var list = new List<Company>();
+            if (File.Exists(CompanyFileName))
+            {
+                var xDocument = XDocument.Load(CompanyFileName);
+                var xElements = xDocument.Root.Elements("Company").ToList();
+                foreach (var elem in xElements)
+                {
+                    var compCond = new Dictionary<int, int>();
+                    foreach (var condition in elem.Element("CompanyConditions").Elements("CompanyCondition").ToList())
+                    {
+                        compCond.Add(Convert.ToInt32(condition.Element("Key").Value), Convert.ToInt32(condition.Element("Value").Value));
+                    }
+                    list.Add(new Company
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        CompanyName = elem.Element("CompanyName").Value,
+                        NameResponsible = elem.Element("NameResponsible").Value,
+                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        CompanyConditions = compCond
                     });
                 }
             }
@@ -228,6 +259,32 @@ namespace TravelCompanyFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(TravelFileName);
+            }
+        }
+
+        private void SaveCompanies()
+        {
+            if (Companies != null)
+            {
+                var xElement = new XElement("Companies");
+                foreach (var company in Companies)
+                {
+                    var condElement = new XElement("CompanyConditions");
+                    foreach (var condition in company.CompanyConditions)
+                    {
+                        condElement.Add(new XElement("CompanyCondition",
+                        new XElement("Key", condition.Key),
+                        new XElement("Value", condition.Value)));
+                    }
+                    xElement.Add(new XElement("Company",
+                     new XAttribute("Id", company.Id),
+                     new XElement("CompanyName", company.CompanyName),
+                     new XElement("NameResponsible", company.NameResponsible),
+                     new XElement("DateCreate", company.DateCreate),
+                     condElement));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(CompanyFileName);
             }
         }
 
