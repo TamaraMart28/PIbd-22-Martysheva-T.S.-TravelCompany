@@ -16,6 +16,7 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
         private readonly IOrderStorage _orderStorage;
         private readonly ITravelStorage _travelStorage;
         private readonly ICompanyStorage _companyStorage;
+        private readonly object locker = new object();
 
         public OrderLogic(IOrderStorage orderStorage, ITravelStorage travelStorage, ICompanyStorage companyStorage)
         {
@@ -52,36 +53,39 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
-            if (order == null)
+            lock (locker)
             {
-                throw new Exception("Заказ не найден");
-            }
-            if (order.Status != Enum.GetName(typeof(OrderStatus), 0) && order.Status != Enum.GetName(typeof(OrderStatus), 4))
-            {
-                throw new Exception("Заказ не в статусе \"Принят\" или \"Требуются материалы\"");
-            }
-            var travel = _travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId });
-            var tempOrder = new OrderBindingModel
-            {
-                Id = order.Id,
-                TravelId = order.TravelId,
-                ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate
-            };
-            if (_companyStorage.CheckAndTake(travel.TravelConditions, tempOrder.Count))
-            {
-                tempOrder.Status = OrderStatus.Выполняется;
-                tempOrder.DateImplement = DateTime.Now;
-                _orderStorage.Update(tempOrder);
-            }
-            else
-            {
-                tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
-                _orderStorage.Update(tempOrder);
+                var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+                if (order == null)
+                {
+                    throw new Exception("Заказ не найден");
+                }
+                if (order.Status != Enum.GetName(typeof(OrderStatus), 0) && order.Status != Enum.GetName(typeof(OrderStatus), 4))
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\" или \"Требуются материалы\"");
+                }
+                var travel = _travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId });
+                var tempOrder = new OrderBindingModel
+                {
+                    Id = order.Id,
+                    TravelId = order.TravelId,
+                    ClientId = order.ClientId,
+                    ImplementerId = model.ImplementerId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate
+                };
+                if (_companyStorage.CheckAndTake(travel.TravelConditions, tempOrder.Count))
+                {
+                    tempOrder.Status = OrderStatus.Выполняется;
+                    tempOrder.DateImplement = DateTime.Now;
+                    _orderStorage.Update(tempOrder);
+                }
+                else
+                {
+                    tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
+                    _orderStorage.Update(tempOrder);
+                }
             }
         }
 
