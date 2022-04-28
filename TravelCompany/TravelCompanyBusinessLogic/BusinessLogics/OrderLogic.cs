@@ -72,16 +72,13 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate
             };
-            try
+            if (_companyStorage.CheckAndTake(travel.TravelConditions, tempOrder.Count))
             {
-                if (_companyStorage.CheckAndTake(travel.TravelConditions, tempOrder.Count))
-                {
-                    tempOrder.Status = OrderStatus.Выполняется;
-                    tempOrder.DateImplement = DateTime.Now;
-                    _orderStorage.Update(tempOrder);
-                }
+                tempOrder.Status = OrderStatus.Выполняется;
+                tempOrder.DateImplement = DateTime.Now;
+                _orderStorage.Update(tempOrder);
             }
-            catch
+            else
             {
                 tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
                 _orderStorage.Update(tempOrder);
@@ -94,6 +91,10 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
+            }
+            if (order.Status == Enum.GetName(typeof(OrderStatus), 4))
+            {
+                return;
             }
             if (order.Status != Enum.GetName(typeof(OrderStatus), 1))
             {
