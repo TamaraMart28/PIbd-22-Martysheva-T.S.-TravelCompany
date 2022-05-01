@@ -177,13 +177,18 @@ namespace TravelCompanyFileImplement
             {
                 XDocument xDocument = XDocument.Load(MessageFileName);
                 var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                int? clientId;
                 foreach (var elem in xElements)
                 {
+                    clientId = null;
+                    if (elem.Element("ClientId").Value != "")
+                    {
+                        clientId = Convert.ToInt32(elem.Element("ClientId").Value);
+                    }
                     list.Add(new MessageInfo
                     {
                         MessageId = elem.Attribute("MessageId").Value,
-                        ClientId = string.IsNullOrEmpty(elem.Element("ClientId").Value) ?
-                        (int?)null : Convert.ToInt32(elem.Element("ClientId").Value),
+                        ClientId = clientId,
                         SenderName = elem.Element("SenderName").Value,
                         DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
                         Subject = elem.Element("Subject").Value,
