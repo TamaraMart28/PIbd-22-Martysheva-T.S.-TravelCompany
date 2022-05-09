@@ -22,13 +22,7 @@ namespace TravelCompanyView
 
         private void FormMessages_Load(object sender, EventArgs e)
         {
-            var list = _logic.Read(null);
-            if (list != null)
-            {
-                dataGridViewM.DataSource = list;
-                dataGridViewM.Columns[0].Visible = false;
-                dataGridViewM.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            }
+            Program.ConfigGrid(_logic.Read(null), dataGridViewM);
         }
     }
 }

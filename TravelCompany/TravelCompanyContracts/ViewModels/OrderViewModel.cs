@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using TravelCompanyContracts.Attributes;
+using System.Runtime.Serialization;
 
 namespace TravelCompanyContracts.ViewModels
 {
     public class OrderViewModel
     {
+        [Column(title: "Номер", width: 50)]
         public int Id { get; set; }
 
         public int TravelId { get; set; }
@@ -17,28 +20,28 @@ namespace TravelCompanyContracts.ViewModels
 
         public int? ImplementerId { get; set; }
 
-        [DisplayName("ФИО клиента")]
+        [Column(title: "Клиент", width: 200)]
         public string ClientFIO { get; set; }
 
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "Исполнитель", width: 100)]
         public string ImplementerFIO { get; set; }
 
-        [DisplayName("Путевка")]
+        [Column(title: "Путевка", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string TravelName { get; set; }
 
-        [DisplayName("Количество")]
+        [Column(title: "Количество", width: 80)]
         public int Count { get; set; }
 
-        [DisplayName("Сумма")]
+        [Column(title: "Сумма", width: 70)]
         public decimal Sum { get; set; }
 
-        [DisplayName("Статус")]
+        [Column(title: "Статус", width: 70)]
         public string Status { get; set; }
 
-        [DisplayName("Дата создания")]
+        [Column(title: "Дата создания", width: 110)]
         public DateTime DateCreate { get; set; }
 
-        [DisplayName("Дата выполнения")]
+        [Column(title: "Дата выполнения", width: 110)]
         public DateTime? DateImplement { get; set; }
     }
 }

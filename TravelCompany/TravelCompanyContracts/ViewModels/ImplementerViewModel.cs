@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using TravelCompanyContracts.Attributes;
 
 namespace TravelCompanyContracts.ViewModels
 {
     public class ImplementerViewModel
     {
+        [Column(title: "Номер", width: 50)]
         public int Id { get; set; }
 
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "Исполнитель", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ImplementerFIO { get; set; }
 
-        [DisplayName("Время работы")]
+        [Column(title: "Время работы", width: 110)]
         public int WorkingTime { get; set; }
 
-        [DisplayName("Время отдыха")]
+        [Column(title: "Время отдыха", width: 110)]
         public int PauseTime { get; set; }
     }
 }

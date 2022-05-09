@@ -38,14 +38,14 @@
             this.dataGridViewM.Location = new System.Drawing.Point(12, 12);
             this.dataGridViewM.Name = "dataGridViewM";
             this.dataGridViewM.RowTemplate.Height = 25;
-            this.dataGridViewM.Size = new System.Drawing.Size(500, 426);
+            this.dataGridViewM.Size = new System.Drawing.Size(795, 426);
             this.dataGridViewM.TabIndex = 0;
             // 
             // FormMessages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 450);
+            this.ClientSize = new System.Drawing.Size(819, 450);
             this.Controls.Add(this.dataGridViewM);
             this.Name = "FormMessages";
             this.Text = "Письма";

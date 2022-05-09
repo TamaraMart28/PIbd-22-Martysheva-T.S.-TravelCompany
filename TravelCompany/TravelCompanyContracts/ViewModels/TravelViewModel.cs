@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using TravelCompanyContracts.Attributes;
 
 namespace TravelCompanyContracts.ViewModels
 {
     public class TravelViewModel
     {
+        [Column(title: "Номер", width: 50)]
         public int Id { get; set; }
 
-        [DisplayName("Название путевки")]
+        [Column(title: "Название путевки", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string TravelName { get; set; }
 
-        [DisplayName("Цена")]
+        [Column(title: "Цена", width: 100)]
         public decimal Price { get; set; }
 
         public Dictionary<int, (string, int)> TravelConditions { get; set; }
