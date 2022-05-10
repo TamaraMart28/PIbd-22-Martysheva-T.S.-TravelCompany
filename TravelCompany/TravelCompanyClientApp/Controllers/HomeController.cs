@@ -147,13 +147,16 @@ namespace TravelCompanyClientApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Messages()
+        public IActionResult Messages(int page = 1)
         {
             if (Program.Client == null)
             {
                 return Redirect("~/Home/Enter");
             }
-            return View(APIClient.GetRequest<List<MessageInfoViewModel>> ($"api/client/GetClientsMessages?clientId={Program.Client.Id}"));
+            var elem = APIClient.GetRequest<(List<MessageInfoViewModel> list, bool hasNext)>
+                ($"api/client/GetClientsMessages?clientId={Program.Client.Id}&page={page}");
+            (List<MessageInfoViewModel>, bool, int) model = (elem.list, elem.hasNext, page);
+            return View(model);
         }
     }
 }

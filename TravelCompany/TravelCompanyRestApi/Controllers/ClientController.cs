@@ -3,6 +3,7 @@ using TravelCompanyContracts.BusinessLogicsContracts;
 using TravelCompanyContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TravelCompanyRestApi.Controllers
 {
@@ -12,6 +13,7 @@ namespace TravelCompanyRestApi.Controllers
     {
         private readonly IClientLogic _logic;
         private readonly IMessageInfoLogic _messageLogic;
+        private readonly int _messagesOnPage = 3;
         public ClientController(IClientLogic logic, IMessageInfoLogic messageLogic)
         {
             _logic = logic;
@@ -30,8 +32,18 @@ namespace TravelCompanyRestApi.Controllers
         }
 
         [HttpGet]
-        public List<MessageInfoViewModel> GetClientsMessages(int clientId) => _messageLogic.Read(new MessageInfoBindingModel { ClientId = clientId });
-
+        public (List<MessageInfoViewModel>, bool) GetClientsMessages(int clientId, int page)
+        {
+            var list = _messageLogic.Read(new MessageInfoBindingModel
+            {
+                ClientId = clientId,
+                ToSkip = (page - 1) * _messagesOnPage,
+                ToTake = _messagesOnPage + 1
+            }).ToList();
+            var isNext = !(list.Count() <= _messagesOnPage);
+            return (list.Take(_messagesOnPage).ToList(), isNext);
+        }
+        
         [HttpPost]
         public void Register(ClientBindingModel model) => _logic.CreateOrUpdate(model);
 

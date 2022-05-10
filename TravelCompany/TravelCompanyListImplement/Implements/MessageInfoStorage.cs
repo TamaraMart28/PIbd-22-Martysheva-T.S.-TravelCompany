@@ -10,7 +10,7 @@ using TravelCompanyListImplement.Models;
 
 namespace TravelCompanyListImplement.Implements
 {
-    public class MessageInfoStorage : IMessageInfoStorage
+    public class MessageInfoStorage /*: IMessageInfoStorage*/
     {
         private readonly DataListSingleton source;
         public MessageInfoStorage()

@@ -22,5 +22,11 @@ namespace TravelCompanyContracts.ViewModels
 
         [DisplayName("Текст")]
         public string Body { get; set; }
+
+        [DisplayName("Прочитано")]
+        public bool Checked { get; set; }
+
+        [DisplayName("Ответ")]
+        public string AnswerText { get; set; }
     }
 }
