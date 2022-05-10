@@ -134,8 +134,14 @@ namespace TravelCompanyDatabaseImplement.Migrations
                     b.Property<string>("MessageId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AnswerText")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Checked")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
@@ -259,6 +265,15 @@ namespace TravelCompanyDatabaseImplement.Migrations
                     b.Navigation("Company");
 
                     b.Navigation("Condition");
+                });
+
+            modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("TravelCompanyDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Messages")
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Order", b =>

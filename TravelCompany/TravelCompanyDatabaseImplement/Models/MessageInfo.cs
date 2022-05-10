@@ -16,6 +16,8 @@ namespace TravelCompanyDatabaseImplement.Models
         public DateTime DateDelivery { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public bool Checked { get; set; }
+        public string AnswerText { get; set; }
         public virtual Client Client { get; set; }
     }
 }
