@@ -35,12 +35,16 @@ namespace TravelCompanyRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ITravelStorage, TravelStorage>();
+            services.AddTransient<ICompanyStorage, CompanyStorage>();
+            services.AddTransient<IConditionStorage, ConditionStorage>();
 
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ITravelLogic, TravelLogic>();
+            services.AddTransient<ICompanyLogic, CompanyLogic>();
+            services.AddTransient<IConditionLogic, ConditionLogic>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TravelCompanyRestApi", Version = "v1" });

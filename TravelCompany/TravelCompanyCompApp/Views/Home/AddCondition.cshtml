@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "AddCondition";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Пополнение хранилища</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Хранилище:</div>
+        <div class="col-8">
+            <select id="company" name="company" class="form-control" asp-items="@(new SelectList(@ViewBag.Companies,"Id", "CompanyName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Условие:</div>
+        <div class="col-8">
+            <select id="condition" name="condition" class="form-control" asp-items="@(new SelectList(@ViewBag.Conditions,"Id", "ConditionName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Количество:</div>
+        <div class="col-8"><input type="text" name="count" id="count" /></div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Пополнить" class="btn btn-primary" /></div>
+    </div>
+</form>

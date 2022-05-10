@@ -15,12 +15,17 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+        private readonly ITravelStorage _travelStorage;
+        private readonly ICompanyStorage _companyStorage;
+        private readonly object locker = new object();
         private readonly IClientStorage _clientStorage;
         private readonly AbstractMailWorker _mailWorker;
 
-        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage, AbstractMailWorker mailWorker)
+        public OrderLogic(IOrderStorage orderStorage, ITravelStorage travelStorage, ICompanyStorage companyStorage)
         {
             _orderStorage = orderStorage;
+            _travelStorage = travelStorage;
+            _companyStorage = companyStorage;
             _clientStorage = clientStorage;
             _mailWorker = mailWorker;
         }
@@ -59,14 +64,39 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
-            if (order == null)
+            lock (locker)
             {
-                throw new Exception("Заказ не найден");
-            }
-            if (order.Status != Enum.GetName(typeof(OrderStatus), 0))
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
+                var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+                if (order == null)
+                {
+                    throw new Exception("Заказ не найден");
+                }
+                if (order.Status != Enum.GetName(typeof(OrderStatus), 0) && order.Status != Enum.GetName(typeof(OrderStatus), 4))
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\" или \"Требуются материалы\"");
+                }
+                var travel = _travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId });
+                var tempOrder = new OrderBindingModel
+                {
+                    Id = order.Id,
+                    TravelId = order.TravelId,
+                    ClientId = order.ClientId,
+                    ImplementerId = model.ImplementerId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate
+                };
+                if (_companyStorage.CheckAndTake(travel.TravelConditions, tempOrder.Count))
+                {
+                    tempOrder.Status = OrderStatus.Выполняется;
+                    tempOrder.DateImplement = DateTime.Now;
+                    _orderStorage.Update(tempOrder);
+                }
+                else
+                {
+                    tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
+                    _orderStorage.Update(tempOrder);
+                }
             }
         }
 
@@ -76,6 +106,10 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
+            }
+            if (order.Status == Enum.GetName(typeof(OrderStatus), 4))
+            {
+                return;
             }
             if (order.Status != Enum.GetName(typeof(OrderStatus), 1))
             {

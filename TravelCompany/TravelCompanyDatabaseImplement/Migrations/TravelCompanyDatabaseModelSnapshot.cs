@@ -43,6 +43,54 @@ namespace TravelCompanyDatabaseImplement.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NameResponsible")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.CompanyCondition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("ConditionId");
+
+                    b.ToTable("CompanyConditions");
+                });
+
             modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Condition", b =>
                 {
                     b.Property<int>("Id")
@@ -194,13 +242,23 @@ namespace TravelCompanyDatabaseImplement.Migrations
                     b.ToTable("TravelConditions");
                 });
 
-            modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.MessageInfo", b =>
+            modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.CompanyCondition", b =>
                 {
-                    b.HasOne("TravelCompanyDatabaseImplement.Models.Client", "Client")
-                        .WithMany("Messages")
-                        .HasForeignKey("ClientId");
+                    b.HasOne("TravelCompanyDatabaseImplement.Models.Company", "Company")
+                        .WithMany("CompanyConditions")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Client");
+                    b.HasOne("TravelCompanyDatabaseImplement.Models.Condition", "Condition")
+                        .WithMany("CompanyConditions")
+                        .HasForeignKey("ConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Condition");
                 });
 
             modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Order", b =>
@@ -254,8 +312,15 @@ namespace TravelCompanyDatabaseImplement.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Company", b =>
+                {
+                    b.Navigation("CompanyConditions");
+                });
+
             modelBuilder.Entity("TravelCompanyDatabaseImplement.Models.Condition", b =>
                 {
+                    b.Navigation("CompanyConditions");
+
                     b.Navigation("TravelConditions");
                 });
 

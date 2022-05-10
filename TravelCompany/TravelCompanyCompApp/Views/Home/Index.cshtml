@@ -1,0 +1,64 @@
+﻿@using TravelCompanyContracts.ViewModels
+@model List<CompanyViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Хранилища</h1>
+</div>
+
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+
+        <p>
+            <a asp-action="Create">Создать хранилище</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Номер
+                    </th>
+                    <th>
+                        Название 
+                    </th>
+                    <th>
+                        ФИО ответственного
+                    </th>
+                    <th>
+                        Дата создания
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NameResponsible)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreate)
+                        </td>
+                        <td>
+                            <a asp-action="Privacy" asp-route-companyId="@item.Id" asp-route-name="@item.CompanyName" asp-route-responsible="@item.NameResponsible">Изменить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -2,7 +2,7 @@
 
 namespace TravelCompanyDatabaseImplement.Migrations
 {
-    public partial class Mig5base : Migration
+    public partial class Mig5Comp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
