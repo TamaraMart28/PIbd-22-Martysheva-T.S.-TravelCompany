@@ -21,7 +21,8 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
         private readonly IClientStorage _clientStorage;
         private readonly AbstractMailWorker _mailWorker;
 
-        public OrderLogic(IOrderStorage orderStorage, ITravelStorage travelStorage, ICompanyStorage companyStorage)
+        public OrderLogic(IOrderStorage orderStorage, ITravelStorage travelStorage, ICompanyStorage companyStorage
+            , IClientStorage clientStorage, AbstractMailWorker mailWorker)
         {
             _orderStorage = orderStorage;
             _travelStorage = travelStorage;
@@ -91,6 +92,12 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
                     tempOrder.Status = OrderStatus.Выполняется;
                     tempOrder.DateImplement = DateTime.Now;
                     _orderStorage.Update(tempOrder);
+                    _mailWorker.MailSendAsync(new MailSendInfoBindingModel
+                    {
+                        MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Login,
+                        Subject = $"Статус заказа № {order.Id} обновлен",
+                        Text = $"Заказ № {order.Id} передан в работу"
+                    });
                 }
                 else
                 {
