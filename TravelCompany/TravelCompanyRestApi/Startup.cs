@@ -35,13 +35,10 @@ namespace TravelCompanyRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ITravelStorage, TravelStorage>();
-            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
 
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ITravelLogic, TravelLogic>();
-            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
-            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

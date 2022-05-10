@@ -68,24 +68,6 @@ namespace TravelCompanyBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                TravelId = order.TravelId,
-                ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
-            _mailWorker.MailSendAsync(new MailSendInfoBindingModel
-            {
-                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Login,
-                Subject = $"Статус заказа № {order.Id} обновлен",
-                Text = $"Заказ № {order.Id} передан в работу"
-            });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
