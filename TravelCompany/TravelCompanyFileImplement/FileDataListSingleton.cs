@@ -223,7 +223,9 @@ namespace TravelCompanyFileImplement
                         SenderName = elem.Element("SenderName").Value,
                         DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value),
                         Subject = elem.Element("Subject").Value,
-                        Body = elem.Element("Body").Value
+                        Body = elem.Element("Body").Value,
+                        Checked = Convert.ToBoolean(elem.Element("Checked").Value),
+                        AnswerText = elem.Element("AnswerText").Value
                     });
                 }
             }
@@ -370,7 +372,10 @@ namespace TravelCompanyFileImplement
                     new XElement("SenderName", msg.SenderName),
                     new XElement("DateDelivery", msg.DateDelivery),
                     new XElement("Subject", msg.Subject),
-                    new XElement("Body", msg.Body)));
+                    new XElement("Body", msg.Body),
+                    new XElement("Checked", msg.Checked),
+                    new XElement("AnswerText ", msg.AnswerText)
+                    ));
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(MessageFileName);
