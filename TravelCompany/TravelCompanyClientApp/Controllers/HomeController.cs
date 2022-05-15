@@ -153,9 +153,9 @@ namespace TravelCompanyClientApp.Controllers
             {
                 return Redirect("~/Home/Enter");
             }
-            var elem = APIClient.GetRequest<(List<MessageInfoViewModel> list, bool hasNext)>
+            var elem = APIClient.GetRequest<(List<MessageInfoViewModel> list, bool isNext)>
                 ($"api/client/GetClientsMessages?clientId={Program.Client.Id}&page={page}");
-            (List<MessageInfoViewModel>, bool, int) model = (elem.list, elem.hasNext, page);
+            (List<MessageInfoViewModel>, bool, int) model = (elem.list, elem.isNext, page);
             return View(model);
         }
     }

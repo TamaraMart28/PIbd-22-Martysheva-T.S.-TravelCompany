@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @using TravelCompanyContracts.ViewModels
-@model (List<MessageInfoViewModel> list, bool hasNext, int page)
+@model (List<MessageInfoViewModel> list, bool isNext, int page)
 @{
     ViewData["Title"] = "Messages";
 }
@@ -62,7 +62,7 @@
             <a asp-action="Messages" asp-route-page="@(Model.page-1)">&#129152;</a> 
             }
             <span>Страница {@(Model.page)}</span> 
-            if (Model.hasNext)
+            if (Model.isNext)
             {
             <a asp-action="Messages" asp-route-page="@(Model.page+1)">&#129154;</a> 
             }

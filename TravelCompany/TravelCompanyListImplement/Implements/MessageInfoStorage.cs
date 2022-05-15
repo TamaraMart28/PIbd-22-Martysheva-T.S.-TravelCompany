@@ -42,7 +42,11 @@ namespace TravelCompanyListImplement.Implements
                 if ((model.ClientId.HasValue && message.ClientId == model.ClientId)
                     || (!model.ClientId.HasValue && (model.ToSkip.HasValue && model.ToTake.HasValue || message.DateDelivery.Date == model.DateDelivery.Date)))
                 {
-                    if (toSkip > 0) { toSkip--; continue; }
+                    if (toSkip > 0) 
+                    { 
+                        toSkip--; 
+                        continue; 
+                    }
                     if (toTake > 0)
                     {
                         result.Add(CreateModel(message));
@@ -104,7 +108,9 @@ namespace TravelCompanyListImplement.Implements
                 SenderName = message.SenderName,
                 DateDelivery = message.DateDelivery,
                 Subject = message.Subject,
-                Body = message.Body
+                Body = message.Body,
+                Checked = message.Checked,
+                AnswerText = message.AnswerText
             };
         }
 
@@ -116,6 +122,8 @@ namespace TravelCompanyListImplement.Implements
             message.DateDelivery = model.DateDelivery;
             message.Subject = model.Subject;
             message.Body = model.Body;
+            message.Checked = model.Checked;
+            message.AnswerText = model.AnswerText;
             return message;
         }
     }
